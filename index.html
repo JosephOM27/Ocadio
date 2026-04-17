@@ -63,15 +63,16 @@
     }
 
     .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--text);
+      display: flex;
+      align-items: center;
       text-decoration: none;
     }
 
-    .nav-logo span { color: var(--accent); }
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
 
     .nav-links { display: flex; gap: 2rem; list-style: none; }
 
@@ -395,6 +396,7 @@
       font-size: 0.8rem;
       backdrop-filter: blur(20px);
       white-space: nowrap;
+      z-index: 10; /* Asegura que quede por delante */
     }
 
     .badge-float-1 {
@@ -879,6 +881,63 @@
       box-shadow: 0 10px 30px rgba(200,240,76,0.25);
     }
 
+    /* ── WHATSAPP CTA ── */
+    .whatsapp-cta {
+      background: var(--bg);
+      margin-top: 0;
+    }
+
+    .cta-box {
+      background: linear-gradient(145deg, #13131a 0%, #0e0e14 100%);
+      border: 1px solid rgba(200,240,76,0.25);
+      border-radius: 32px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .cta-box h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: #fff;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+      border: none;
+      box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+    }
+
+    .whatsapp-btn i {
+      font-size: 1.4rem;
+    }
+
+    .whatsapp-btn:hover {
+      background: #20b859;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(37,211,102,0.4);
+    }
+
     /* ── FOOTER ── */
     .footer {
       border-top: 1px solid var(--border);
@@ -895,14 +954,11 @@
       gap: 1rem;
     }
 
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--text);
+    .footer-logo img {
+      height: 28px;
+      width: auto;
+      display: block;
     }
-
-    .footer-logo span { color: var(--accent); }
 
     .footer-copy { color: var(--muted); font-size: 0.85rem; }
 
@@ -941,6 +997,7 @@
       .form-row { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
+      .cta-box h2 { font-size: 1.8rem; }
     }
 
     @media (max-width: 600px) {
@@ -984,7 +1041,9 @@
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="#" class="nav-logo">Joseph<span>.</span></a>
+  <a href="#" class="nav-logo">
+    <img src="images/Logo Ocadio.png" alt="Joseph Ocadio">
+  </a>
   <ul class="nav-links">
     <li><a href="#habilidades">Habilidades</a></li>
     <li><a href="#sobre-mi">Sobre Mí</a></li>
@@ -1175,7 +1234,8 @@
     <div class="about-grid">
       <div class="about-img-wrap reveal">
         <div class="about-img-main">
-          <img src="images/Logo Ocadio.png" alt="Joseph Ocadio" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <!-- Imagen reemplazada por una foto de Unsplash (retrato profesional) -->
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Joseph Ocadio" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="about-img-placeholder">
             <i class="fas fa-user"></i>
           </div>
@@ -1328,10 +1388,25 @@
   </div>
 </section>
 
+<!-- WHATSAPP CTA (NUEVA SECCIÓN) -->
+<section class="whatsapp-cta">
+  <div class="section-inner">
+    <div class="cta-box reveal">
+      <h2>¿Prefieres hablar directo?</h2>
+      <p>Envíame un mensaje por WhatsApp y coordinamos tu proyecto de inmediato.</p>
+      <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-logo">Joseph<span>.</span></div>
+    <div class="footer-logo">
+      <img src="images/Logo Ocadio.png" alt="Joseph Ocadio">
+    </div>
     <p class="footer-copy">© 2024 Joseph Ocadio. Diseñado con cuidado.</p>
     <div style="display:flex; gap:1rem;">
       <a href="#" style="color:var(--muted); text-decoration:none; font-size:0.85rem; transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Inicio</a>
