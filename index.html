@@ -1389,14 +1389,22 @@
         <h2 class="contact-title">¿Tienes un proyecto en mente?</h2>
         <p class="contact-desc">Estoy disponible para proyectos freelance y colaboraciones. Hablemos sobre cómo puedo ayudarte a llevar tu presencia digital al siguiente nivel.</p>
         <div class="contact-socials">
-          <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-          <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/joseph.ocadio.2025/" target="_blank" class="social-link" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/joseph-ocadio-moreno-8520a9160/" target="_blank" class="social-link" title="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <!-- WhatsApp -->
+          <a href="https://wa.me/51952644193?text=Hola%20quiero%20crear%20mi%20Proyecto%20contigo" target="_blank" class="social-link" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
         </div>
       </div>
-      
-      <!-- FORMULARIO MODIFICADO -->
+
+      <!-- FORMULARIO CON NUEVOS CAMPOS -->
       <form id="contactForm" class="contact-form">
         <div class="form-row">
           <div class="form-field">
@@ -1408,14 +1416,56 @@
             <input type="email" name="email" placeholder="tu@email.com" required>
           </div>
         </div>
+
+        <!-- Tipo de proyecto (select) -->
+        <div class="form-field">
+          <label>Tipo de proyecto</label>
+          <select name="tipo_proyecto" required style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 0.85rem 1rem; color: var(--text); font-family: var(--font-body); font-size: 0.9rem;">
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="landing">Landing Page</option>
+            <option value="ecommerce">E-commerce / Tienda online</option>
+            <option value="one_page">One Page</option>
+            <option value="corporativo">Sitio Corporativo</option>
+            <option value="blog">Blog / Revista</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <!-- Teléfono con selector de país -->
+        <div class="form-row">
+          <div class="form-field">
+            <label>Código de país</label>
+            <select name="codigo_pais" required style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 0.85rem 1rem; color: var(--text); font-family: var(--font-body); font-size: 0.9rem;">
+              <option value="">Seleccionar</option>
+              <option value="+51">Perú (+51)</option>
+              <option value="+56">Chile (+56)</option>
+              <option value="+52">México (+52)</option>
+              <option value="+54">Argentina (+54)</option>
+              <option value="+598">Uruguay (+598)</option>
+              <option value="+591">Bolivia (+591)</option>
+              <option value="+595">Paraguay (+595)</option>
+              <option value="+503">El Salvador (+503)</option>
+              <option value="+57">Colombia (+57)</option>
+              <option value="+58">Venezuela (+58)</option>
+              <option value="+1">Estados Unidos (+1)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Número de teléfono</label>
+            <input type="tel" name="telefono" placeholder="Ej: 987654321" required>
+          </div>
+        </div>
+
         <div class="form-field">
           <label>Asunto</label>
           <input type="text" name="asunto" placeholder="¿En qué puedo ayudarte?" required>
         </div>
+
         <div class="form-field">
           <label>Mensaje</label>
           <textarea name="mensaje" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
         </div>
+
         <button type="submit" class="form-submit">
           Enviar Mensaje <i class="fas fa-paper-plane"></i>
         </button>
@@ -1504,57 +1554,52 @@
       nav.style.padding = '1.25rem 4vw';
     }
   });
+</script>
+<script>
+  (function() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    const feedback = document.getElementById('formFeedback');
 
-  // Envío del formulario a Google Apps Script
-const form = document.getElementById('contactForm');
-const feedback = document.getElementById('formFeedback');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-if (form) {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Mostrar estado "enviando"
-    const submitBtn = form.querySelector('.form-submit');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-    submitBtn.disabled = true;
-    
-    // Recoger datos del formulario
-    const formData = new FormData(form);
-    const data = new URLSearchParams();
-    for (let [key, value] of formData.entries()) {
-      data.append(key, value);
-    }
-    
-    try {
-      // Reemplazar AQUI con la URL que copiaste de Apps Script
-      const response = await fetch('https://script.google.com/macros/s/AKfycbykGFFGrXg8B_UtDMYp6cochYrDu3E4AhpuihAJOsJNjqF2kbOPfkqfqBTFJXkTPf3F/exec', {
-        method: 'POST',
-        body: data,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        }
-      });
-      
-      const result = await response.json();
-      
-      if (result.result === 'success') {
-        feedback.innerHTML = '<span style="color: #c8f04c;">✅ Mensaje enviado correctamente. ¡Gracias!</span>';
-        form.reset();
-      } else {
-        feedback.innerHTML = '<span style="color: #ff6b6b;">❌ Error: ' + result.message + '</span>';
+      const submitBtn = form.querySelector('.form-submit');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData(form);
+      const data = new URLSearchParams();
+      for (let [key, value] of formData.entries()) {
+        data.append(key, value);
       }
-    } catch (error) {
-      feedback.innerHTML = '<span style="color: #ff6b6b;">❌ Error de conexión. Intenta de nuevo más tarde.</span>';
-      console.error(error);
-    } finally {
-      submitBtn.innerHTML = originalText;
-      submitBtn.disabled = false;
-      // Ocultar mensaje después de 5 segundos
-      setTimeout(() => { feedback.innerHTML = ''; }, 5000);
-    }
-  });
-}
+
+      try {
+        // Reemplaza con tu URL real de Google Apps Script
+        const response = await fetch('https://script.google.com/macros/s/AKfycbykGFFGrXg8B_UtDMYp6cochYrDu3E4AhpuihAJOsJNjqF2kbOPfkqfqBTFJXkTPf3F/exec', {
+          method: 'POST',
+          body: data,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+        const result = await response.json();
+
+        if (result.result === 'success') {
+          feedback.innerHTML = '<span style="color: #c8f04c;">✅ Mensaje enviado correctamente. ¡Gracias!</span>';
+          form.reset();
+        } else {
+          feedback.innerHTML = '<span style="color: #ff6b6b;">❌ Error: ' + result.message + '</span>';
+        }
+      } catch (error) {
+        feedback.innerHTML = '<span style="color: #ff6b6b;">❌ Error de conexión. Intenta de nuevo más tarde.</span>';
+        console.error(error);
+      } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        setTimeout(() => { feedback.innerHTML = ''; }, 5000);
+      }
+    });
+  })();
 </script>
 </body>
 </html>
