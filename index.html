@@ -106,6 +106,9 @@
       font-weight: 500;
       text-decoration: none;
       transition: transform 0.2s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
@@ -396,7 +399,7 @@
       font-size: 0.8rem;
       backdrop-filter: blur(20px);
       white-space: nowrap;
-      z-index: 10; /* Asegura que quede por delante */
+      z-index: 10;
     }
 
     .badge-float-1 {
@@ -998,6 +1001,10 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .cta-box h2 { font-size: 1.8rem; }
+      /* Ocultar botón de WhatsApp en el header en móvil */
+      .nav-cta {
+        display: none;
+      }
     }
 
     @media (max-width: 600px) {
@@ -1021,6 +1028,26 @@
 
     .nav-mobile.open { display: flex; }
     .nav-mobile a { color: var(--text); text-decoration: none; font-size: 1rem; }
+
+    /* Botón de WhatsApp dentro del menú móvil */
+    .nav-m-whatsapp {
+      background: #25D366;
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 100px;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .nav-m-whatsapp:hover {
+      background: #20b859;
+    }
 
     /* Cursor glow */
     .cursor-glow {
@@ -1050,7 +1077,9 @@
     <li><a href="#proyectos">Proyectos</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a href="#contacto" class="nav-cta">Trabajemos Juntos</a>
+  <a href="https://wa.me/51952644193?text=Hola%20quiero%20crear%20mi%20Proyecto%20contigo" target="_blank" class="nav-cta">
+    <i class="fab fa-whatsapp"></i> Trabajemos Juntos
+  </a>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
@@ -1061,6 +1090,9 @@
   <a href="#sobre-mi" class="nav-m-link">Sobre Mí</a>
   <a href="#proyectos" class="nav-m-link">Proyectos</a>
   <a href="#contacto" class="nav-m-link">Contacto</a>
+  <a href="https://wa.me/51952644193?text=Hola%20quiero%20crear%20mi%20Proyecto%20contigo" target="_blank" class="nav-m-whatsapp">
+    <i class="fab fa-whatsapp"></i> Trabajemos Juntos
+  </a>
 </div>
 
 <!-- HERO -->
@@ -1349,7 +1381,7 @@
 </section>
 
 <!-- CONTACTO -->
-<!--<section id="contacto">
+<section id="contacto">
   <div class="section-inner">
     <div class="contact-wrap reveal">
       <div>
@@ -1388,10 +1420,10 @@
       </div>
     </div>
   </div>
-</section>-->
+</section>
 
 <!-- WHATSAPP CTA (NUEVA SECCIÓN) -->
-<section class="whatsapp-cta" id="contacto">
+<section class="whatsapp-cta">
   <div class="section-inner">
     <div class="cta-box reveal">
       <h2>¿Prefieres hablar directo?</h2>
@@ -1433,7 +1465,7 @@
     navMobile.classList.toggle('open');
   });
 
-  document.querySelectorAll('.nav-m-link').forEach(a => {
+  document.querySelectorAll('.nav-m-link, .nav-m-whatsapp').forEach(a => {
     a.addEventListener('click', () => navMobile.classList.remove('open'));
   });
 
